@@ -1,0 +1,14 @@
+    {% extends 'base.html' %}
+
+
+
+    {% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <!-- <p style="color: red">{{ form.errors }}</p>  -->
+        
+        <button>Post</button>
+
+
+    {% endblock content %}

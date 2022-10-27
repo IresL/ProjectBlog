@@ -1,0 +1,43 @@
+
+    {% extends 'base.html' %}
+
+
+
+    {% block content %}
+
+    
+    <h1>{{post.title}}</h1>
+    <div>
+        {{post.user}} &mdash;; {{post.create_date}}
+    </div>
+    <p>{{post.text}}</p>
+
+
+
+    {% if request.user == post.user %}
+
+
+    <div>
+        
+        <form action="{% url 'core:post-delete' %}" method="post">
+            {% csrf_token %}
+            <input name='pk' type="number" value="{{ post.pk }}" hidden/>
+            <button>Delete</button>
+        </form>
+        <a href="{% url 'core:post_edit' post.id %}"><button>Edit</button></a>
+        
+    </div>
+
+    {% endif %}
+
+    <div>
+        {% for comment in post.comment_set.all %}
+            <div style="border-bottom: 1px solid black;">
+                <h4>{{comment.user}}</h4>
+                <p>{{comment.text}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    
+
+    {% endblock content %}

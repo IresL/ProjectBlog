@@ -1,0 +1,36 @@
+    
+    
+    {% extends 'base.html' %}
+    <!-- {{posts}} -->
+
+
+    {% block content %}
+    
+    <ul>
+    <a href="{% url 'core:post-create' %}">add new post</a>
+    
+    </ul>
+
+
+    <ul>
+
+    {% for post in posts %}
+        <li>
+            <a href="{% url 'core:post-detail' post.pk %}">{{ post.title }} - {{ post.user }} - {{ post.create_date }}</a>
+        </li>
+
+    {% endfor %}
+    </ul>
+
+
+    <hr/>
+
+    <div>
+        <ul>
+            {{custom_form.as_p}}
+        </ul>
+    </div>
+
+    <p></p>
+
+    {% endblock content %}
